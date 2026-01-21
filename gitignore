@@ -12,13 +12,14 @@ crash.*.log
 *.tfvars
 *.tfvars.json
 
-# AWS credentials (NEVER commit these)
+# AWS credentials
 .aws/
 credentials
 config
 
-# VSCode settings
+# VSCode workspace
 .vscode/
-
+# Windows files
+Thumbs.db
 # macOS junk files
 .DS_Store
