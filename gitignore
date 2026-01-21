@@ -1,0 +1,24 @@
+# Terraform local files
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Sensitive variable files
+*.tfvars
+*.tfvars.json
+
+# AWS credentials (NEVER commit these)
+.aws/
+credentials
+config
+
+# VSCode settings
+.vscode/
+
+# macOS junk files
+.DS_Store
