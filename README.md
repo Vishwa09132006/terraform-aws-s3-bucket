@@ -99,15 +99,15 @@ terraform plan
 ```
 terraform apply
 ```
-## First Output: 
+### First Output: 
 ![](assets/terraform-apply.png)
 
-## Second Output: 
+### Second Output: 
 ![](assets/terraform-apply-results.png)
 
 ## 💣 Destroying the Infrastructure (Optional)
 
-If you want to remove the S3 bucket and all Terraform-managed resources, run:
+### If you want to remove the S3 bucket and all Terraform-managed resources, run:
 
 ```
 terraform destroy
@@ -115,8 +115,10 @@ terraform destroy
 
 ![](assets/terraform-destroy1.png)
 
-Terraform will show you a list of resources it plans to delete.
-Type yes to confirm the destruction.
+### Terraform will show you a list of resources it plans to delete.
+### Type yes to confirm the destruction.
+
+![](assets/terraform-destroy2.png)
 
 ⚠️ Warning:
 Destroying the S3 bucket will permanently delete:
@@ -132,19 +134,19 @@ You should see your bucket created.
 
 ![](assets/s3-bucket-in-console.png)
 ## 🔁 Bucket Versioning Enabled
-This project demonstrates enabling versioning on your S3 bucket — useful for:
+### This project demonstrates enabling versioning on your S3 bucket — useful for:
 
-Security
+-Security
 
-Backups
+-Backups
 
-Auditing
+-Auditing
 
-Preventing accidental file deletion
+-Preventing accidental file deletion
 
-(Add screenshot showing versioning enabled here)
+![](assets/bucket-versioning.png)
 
-### 🌐 Pushing This Project to GitHub
+## 🌐 Pushing This Project to GitHub
 Make sure your .gitignore contains:
 
 ```
@@ -160,9 +162,22 @@ git commit -m "Initial commit"
 git push -u origin main
 ```
 
-### 🧹 Never Commit These Files
-File / Folder	Reason
-.terraform/	Dependencies, >600MB size issues
-terraform.tfstate	Contains sensitive account details
-terraform.tfstate.backup	Same reason
-.terraform.lock.hcl	Optional — safe to ignore
+---
+
+## 🛑 Files You Should Never Push to GitHub
+
+When working with Terraform, some files and folders **contain sensitive information or large binaries** and should never be committed. Make sure your `.gitignore` includes them.
+
+| File / Folder                                     | Reason                                                                 |
+|--------------------------------------------------|-------------------------------------------------------------------------|
+| `.terraform/`                                     | Local Terraform dependencies and plugins (can be hundreds of MB)       |
+| `terraform.tfstate`                               | Contains sensitive account info (Access Keys, Bucket names, etc.)      |
+| `terraform.tfstate.backup`                        | Backup of state file (same sensitive info)                             |
+| `.terraform.lock.hcl`                             | Terraform dependency lock file (optional, safe to ignore)              |
+| `.terraform/providers/registry.terraform.io/*`    | Provider binaries (very large, do not commit)                          |
+
+**Tip:**  
+Always double-check before committing that these files are **not included**.  
+Use `git status` to verify what’s staged for commit.
+
+
