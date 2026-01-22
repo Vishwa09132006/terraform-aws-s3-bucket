@@ -20,9 +20,30 @@ Before starting, make sure you have the following installed:
 
 ### Local Requirements
 - Terraform (v1.0+ recommended)
+  Download & install: https://developer.hashicorp.com/terraform/downloads
+  Verify installation:
+  terraform -v
+
 - AWS CLI
+Install AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+Verify:
+aws --version
+
+-AWS Credentials
+You must configure IAM credentials locally:
+aws configure
+Provide:
+AWS Access Key ID
+AWS Secret Access Key
+Default region (e.g., us-east-1)
+Output format (optional)
+
 - Git
+https://git-scm.com/downloads
+
+
 - VS Code (or any code editor)
+https://code.visualstudio.com/download
 
 ### AWS Requirements
 - An AWS account
@@ -47,7 +68,7 @@ terraform-s3-project/
 🛠️ Terraform Configuration (main.tf)
 This is the file where your S3 bucket is defined.
 
-(Add screenshot or code snippet of your main.tf here)
+![main.tf](assets/main-tf-screenshot.png)
 
 📦 Deploying the Infrastructure
 1️⃣ Initialize Terraform
@@ -62,13 +83,15 @@ terraform plan
 4️⃣ Apply changes to AWS
 
 terraform apply
-(Add screenshot of a successful terraform apply here)
+![Output:](assets/terraform-apply.png)
 
 🗄️ Verifying Your S3 Bucket in AWS Console
 After applying, go to:
 
 AWS Console → S3
 You should see your bucket created.
+
+![S3 Bucket in AWS Console](assets/s3-bucket-in-console.png)
 
 🔁 Bucket Versioning Enabled
 This project demonstrates enabling versioning on your S3 bucket — useful for:
@@ -81,7 +104,7 @@ Auditing
 
 Preventing accidental file deletion
 
-(Add screenshot showing versioning enabled here)
+![Bucket Versioned in the AWS Console under Properties](assets/bucket-versioning.png)
 
 🌐 Pushing This Project to GitHub
 Make sure your .gitignore contains:
@@ -94,9 +117,13 @@ Then push normally:
 git add .
 git commit -m "Initial commit"
 git push -u origin main
+
 🧹 Never Commit These Files
 File / Folder	Reason
 .terraform/	Dependencies, >600MB size issues
 terraform.tfstate	Contains sensitive account details
 terraform.tfstate.backup	Same reason
 .terraform.lock.hcl	Optional — safe to ignore
+
+
+
