@@ -1,5 +1,9 @@
 # 🚀 Terraform AWS S3 Bucket Project
 
+[![Terraform](https://img.shields.io/badge/Terraform-v1.0+-blue)](https://www.terraform.io/)
+[![AWS](https://img.shields.io/badge/AWS-Cloud-orange)](https://aws.amazon.com/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
 This project demonstrates how to create and manage an AWS S3 bucket using Terraform, including enabling versioning, validating state files, and securely structuring your Terraform configuration.
 
 It is designed as a **portfolio-ready cloud engineering project** to help you strengthen your skills and resume.
@@ -8,42 +12,18 @@ It is designed as a **portfolio-ready cloud engineering project** to help you st
 
 ## 📘 Project Architecture
 
-The diagram below shows how Terraform interacts with AWS during this project:
+![Architecture Diagram](assets/project-diagram.png)  
 
-![Project Diagram](assets/project-diagram.png)
 
 ---
 
 ## 🧰 Prerequisites
 
-Before starting, make sure you have the following installed:
-
 ### Local Requirements
 - Terraform (v1.0+ recommended)
-  Download & install: https://developer.hashicorp.com/terraform/downloads
-  Verify installation:
-  terraform -v
-
 - AWS CLI
-Install AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
-Verify:
-aws --version
-
--AWS Credentials
-You must configure IAM credentials locally:
-aws configure
-Provide:
-AWS Access Key ID
-AWS Secret Access Key
-Default region (e.g., us-east-1)
-Output format (optional)
-
 - Git
-https://git-scm.com/downloads
-
-
 - VS Code (or any code editor)
-https://code.visualstudio.com/download
 
 ### AWS Requirements
 - An AWS account
@@ -53,47 +33,105 @@ https://code.visualstudio.com/download
   - `AmazonEC2ReadOnlyAccess`
 
 ### Authentication
+
 Run this before using Terraform:
 
-```bash
+```
 aws configure
+```
+
 Provide your AWS Access Key and Secret Key.
 
-📂 Project Structure
+### 📂 Project Structure
+
+```
 terraform-s3-project/
 │── main.tf
 │── variables.tf       (optional)
 │── outputs.tf         (optional)
 │── assets/            (contains screenshots)
+```
+
 🛠️ Terraform Configuration (main.tf)
-This is the file where your S3 bucket is defined.
 
-![main.tf](assets/main-tf-screenshot.png)
+This is the file where your S3 bucket is defined:
 
-📦 Deploying the Infrastructure
-1️⃣ Initialize Terraform
+### Example main.tf
+```
+provider "aws" {
+  region = "us-east-1"
+}
 
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "my-terraform-bucket"
+  acl    = "private"
+
+  versioning {
+    enabled = true
+  }
+
+  tags = {
+    Name        = "MyBucket"
+    Environment = "Dev"
+  }
+} 
+```
+(Add screenshot of your main.tf if desired in assets/ folder)
+
+## 📦 Deploying the Infrastructure
+### 1️⃣ Initialize Terraform
+
+```
 terraform init
-2️⃣ Validate the configuration
+```
+### 2️⃣ Validate the configuration
 
+```
 terraform validate
-3️⃣ Plan the infrastructure
+```
+### 3️⃣ Plan the infrastructure
 
+```
 terraform plan
-4️⃣ Apply changes to AWS
+```
+### 4️⃣ Apply changes to AWS
 
+```
 terraform apply
-![Output:](assets/terraform-apply.png)
+```
+## First Output: 
+![](assets/terraform-apply.png)
 
-🗄️ Verifying Your S3 Bucket in AWS Console
+## Second Output: 
+![](assets/terraform-apply-results.png)
+
+## 💣 Destroying the Infrastructure (Optional)
+
+If you want to remove the S3 bucket and all Terraform-managed resources, run:
+
+```
+terraform destroy
+```
+
+![](assets/terraform-destroy1.png)
+
+Terraform will show you a list of resources it plans to delete.
+Type yes to confirm the destruction.
+
+⚠️ Warning:
+Destroying the S3 bucket will permanently delete:
+
+All objects in the bucket
+All versions (if versioning is enabled)
+
+## 🗄️ Verifying Your S3 Bucket in AWS Console
 After applying, go to:
 
 AWS Console → S3
 You should see your bucket created.
 
-![S3 Bucket in AWS Console](assets/s3-bucket-in-console.png)
-
-🔁 Bucket Versioning Enabled
+![](assets/s3-bucket-in-console.png)
+## 🔁 Bucket Versioning Enabled
 This project demonstrates enabling versioning on your S3 bucket — useful for:
 
 Security
@@ -104,26 +142,27 @@ Auditing
 
 Preventing accidental file deletion
 
-![Bucket Versioned in the AWS Console under Properties](assets/bucket-versioning.png)
+(Add screenshot showing versioning enabled here)
 
-🌐 Pushing This Project to GitHub
+### 🌐 Pushing This Project to GitHub
 Make sure your .gitignore contains:
 
+```
 .terraform/
 terraform.tfstate
 terraform.tfstate.backup
-Then push normally:
+```
 
+Then push normally:
+```
 git add .
 git commit -m "Initial commit"
 git push -u origin main
+```
 
-🧹 Never Commit These Files
+### 🧹 Never Commit These Files
 File / Folder	Reason
 .terraform/	Dependencies, >600MB size issues
 terraform.tfstate	Contains sensitive account details
 terraform.tfstate.backup	Same reason
 .terraform.lock.hcl	Optional — safe to ignore
-
-
-
