@@ -122,10 +122,6 @@ terraform destroy
 
 ---
 
-## 📸 **Screenshots**
-
-| Description | Image |
-|------------|-------|
 | Terraform apply preview | ![](assets/terraform-apply.png) |
 | Terraform apply results | ![](assets/terraform-apply-results.png) |
 
@@ -148,3 +144,4 @@ terraform destroy
 Passionate about AWS, Infrastructure as Code, and cloud automation.
 
 ---
+
