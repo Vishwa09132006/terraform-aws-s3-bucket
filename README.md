@@ -133,7 +133,7 @@ AWS Console → S3
 You should see your bucket created.
 
 ![](assets/s3-bucket-in-console.png)
-## 🔁 Bucket Versioning Enabled
+## 🔁 Bucket Versioning Enabled (find this under the properties tab)
 ### This project demonstrates enabling versioning on your S3 bucket — useful for:
 
 -Security
@@ -178,6 +178,6 @@ When working with Terraform, some files and folders **contain sensitive informat
 
 **Tip:**  
 Always double-check before committing that these files are **not included**.  
-Use `git status` to verify what’s staged for commit.
+Use `git status` to verify which files are staged for the commit.
 
-
+Follow along and learn and use other resources to download the tools, create the Terraform files that are not provided, and integrating GitHub.
